@@ -1,0 +1,110 @@
+#include<bits/stdc++.h>
+using namespace std;
+void merge_array(int a[], int l, int mid, int r)
+{   int b[r-l+1];
+    int i=l, j=mid+1, k=0;
+    while(i<=mid and j<=r)
+    {
+        if(a[i]<a[j]) {b[k]=a[i]; i++;}
+        else {b[k]=a[j]; j++;}
+        k++;
+    }
+    if(i>mid)
+        while(j<=r) b[k++]=a[j++];
+    else while(i<=mid) b[k++]=a[i++];
+    for(int k=0;k<r-l+1;k++) a[k+l]=b[k];
+}
+
+void merge_sort(int a[], int l, int r)
+{
+    if(l<r)
+    {
+        int mid=(l+r)/2;
+        merge_sort(a, l, mid);
+        merge_sort(a, mid+1, r);
+        merge_array(a, l,mid, r);
+    }
+}
+
+signed main()
+{
+    int a[5]={5,4,-1,2,1};
+    merge_sort(a, 0, 4);
+    for(int i=0;i<5;i++) cout<<a[i]<<" ";
+return 0;
+}
+
+----------------------------------------------
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class HelloWorld {
+    public static void mergesort(int a[],int left,int right)
+    {
+        int mid = (left+right)/2;
+        if(left<right)
+        {
+            mergesort(a,left,mid);
+            mergesort(a,mid+1,right);
+            merge(a,mid,left,right);
+        }
+    }
+    public static void merge(int a[],int mid,int left,int right)
+    {
+        int len = a.length-1;
+        int b[] = new int[len];
+        int i =left;
+        int j=mid+1;
+        int k=left;
+        while(i<=mid && j<=right)
+        {
+            if(a[i]<a[j]){
+            b[k]=a[i];
+            i++;
+            }
+            else{
+                b[k]=a[j];
+                j++;
+            }
+            k++;
+        }
+        if(i>mid)
+        {
+            while(j<=right)
+            {
+                b[k]=a[j];
+                k++;
+                j++;
+ 
+            }
+        }
+        else
+        {
+            while(i<=mid)
+            {
+                b[k] = a[i];
+                k++;
+                i++;
+            }
+        }
+        for(k=0;k<;k++)
+        {
+            a[k]=b[k];
+            System.out.println(a[k]);
+        }
+    }
+    
+    public static void main(String[] args) {
+        System.out.println("hello world");
+        int arr[] = {9,4,7,6,3,1,5};
+        int lef = 0;
+        int righ = arr.length-1;
+        mergesort(arr,lef,righ);
+        System.out.println("Sorted array");
+        //System.out.println();
+        // for(int i=0;i<4;i++);
+        // {
+        //     System.out.println(arr[]+" ");
+        // }
+    }
+}
