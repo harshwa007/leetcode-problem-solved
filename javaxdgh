@@ -1,0 +1,57 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		//System.out.println("Hello World");
+		char num[]={'zero','one','two','three','four','five','six','seven','eight','nine'};
+        Scanner sc =new Scanner(System.in);
+	    int number=sc.nextInt();
+	    int temp=number;
+	    int j=1000;
+	    int a[]=new
+	    while(number>0)
+	    {
+	        number=number/j;
+	        j=j/10;
+	        
+	    }
+	    
+	    
+	}
+}
+/*
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	//	String str =new String;
+		Scanner sc =new Scanner(System.in);
+	    String str=sc.next();
+	    char chara[]=str.toCharArray();
+	    String num= "";
+	    String letter="";
+	 
+	   for(int i=0;i<chara.length;i++)
+	    {
+	        if(Character.isDigit(chara[i]))
+	        {
+                //System.out.println(chara[i]);
+                num=num+chara[i];
+	        }
+	        else{
+                //System.out.println(chara[i]);
+                letter=letter+chara[i];
+	        }
+	    }
+	    System.out.println("Number : "+ num);
+	    System.out.println("letter: " + letter );
+	}
+}
+*/
