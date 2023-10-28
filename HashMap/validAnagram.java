@@ -28,3 +28,30 @@ class Solution {
         return true;
     }
 }
+/* GeeksforGeek
+class Solution
+{    
+    //Function is to check whether two strings are anagram of each other or not.
+    public static boolean isAnagram(String a,String b)
+    {
+         
+        // Your code here
+        HashMap<Character,Integer>h1 = new HashMap<>(); 
+        HashMap<Character,Integer>h2 = new HashMap<>(); 
+        char[] aarray=a.toCharArray();
+        char[] barray=b.toCharArray();
+        for(char c:aarray)
+        {
+            h1.put(c,h1.getOrDefault(c,0)+1);
+        }
+        for(char c:barray)
+        {
+            h2.put(c,h2.getOrDefault(c,0)+1);
+        }
+        return h1.equals(h2);
+        
+        
+        
+    }
+}
+*/
