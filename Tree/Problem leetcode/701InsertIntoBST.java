@@ -1,7 +1,7 @@
 package Tree.Problem leetcode;
 
 public class 701InsertIntoBST {
-    /**
+/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -18,6 +18,7 @@ public class 701InsertIntoBST {
  */
 class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
+       /* itterative
         TreeNode newNode=new TreeNode(val);
         TreeNode parent=null;
         TreeNode curr = root;
@@ -52,6 +53,22 @@ class Solution {
             parent.right = newNode;
         }
         return root;
+        */
+        //by recursive
+        if(root == null)
+        {
+            return new TreeNode(val);
+        }
+        if(val<root.val)
+        {
+            root.left = insertIntoBST(root.left,val);
+        }
+        else
+        {
+            root.right = insertIntoBST(root.right,val);
+        }
+        return root;
     }
+}
 }
 }
