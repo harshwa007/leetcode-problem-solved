@@ -1,0 +1,31 @@
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        Map<String,Integer> map = new TreeMap<>();
+        HashSet<String> hs = new HashSet<>();
+        for(String str:banned)
+        {
+            hs.add(str);
+        }
+        for(int i=0;i<paragraph.length();i++)
+        {
+            String str="";
+            char c = paragraph.charAt(i);
+            if(c!=' ' || c!=',' || c!='.')
+            {
+                str=str+c;
+            }
+            else
+            {
+                str.toLower();
+                if(!hs.contains(str))
+                {
+                    map.put(str,map.getOrDefault(map.get(str),0)+1);
+                    str="";
+                }
+            }
+
+        }
+        int size = 0;
+        
+    }
+}
