@@ -1,0 +1,53 @@
+class Solution {
+
+
+    public int value(String s, int i)
+    {
+        if(s.charAt(i)=='I')
+        {
+            return 1;
+        }
+        if(s.charAt(i)=='V')
+        {
+            return 5;
+        }
+        if(s.charAt(i)=='X')
+        {
+            return 10;
+        }
+        if(s.charAt(i)=='L')
+        {
+            return 50;
+        }
+        if(s.charAt(i)=='C')
+        {
+            return 100;
+        }
+        if(s.charAt(i)=='D')
+        {
+            return 500;
+        }
+        if(s.charAt(i)=='M')
+        {
+            return 1000;
+        }
+        return 0;
+    }
+    public int romanToInt(String s) {
+        int sum = 0;
+        int i;
+        for( i=0;i<s.length()-1;i++)
+     {
+        if(value(s,i)<value(s, i+1))
+        {
+            sum = sum-value(s,i);
+        }
+        else
+        {
+            sum = sum +value(s,i);
+        }
+    }
+    sum = sum + value(s,i);
+        return sum  ;
+    }
+}
