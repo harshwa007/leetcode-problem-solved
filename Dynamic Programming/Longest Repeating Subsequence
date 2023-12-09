@@ -1,0 +1,30 @@
+class Solution
+{
+    public int LongestRepeatingSubsequence(String str)
+    {
+        // code here
+        int m = str.length();
+        int n= str.length();
+        int dp[][] = new int[m+1][n+1];
+        return lcs(str,m,n,dp);
+    }
+    public int lcs(String str,int m,int n,int dp[][])
+    {
+        for(int i=1;i<=m;i++)
+        {
+            for(int j=1;j<=n;j++)
+            {
+                if(str.charAt(i-1)==str.charAt(j-1) && i!=j)
+                {
+                    dp[i][j] = dp[i-1][j-1]+1;
+                }
+                else
+                {
+                    dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+    
+}
