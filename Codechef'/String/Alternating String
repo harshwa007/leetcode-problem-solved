@@ -1,0 +1,57 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+//https://www.codechef.com/problems/ALTSTR
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    int n=sc.nextInt();
+		    String str = sc.next();
+		    //StringBuilder temp = new StringBuilder();
+		    String temp = "";
+		    int onec =0;
+		    int zeroc=0;
+		    for(char c:str.toCharArray())
+		    {
+		        if(c=='1')
+		        {
+		            onec+=1;
+		        }
+		        else{
+		            zeroc+=1;
+		        }
+		    }
+		    int cnt=0;
+		    while(onec!=0 && zeroc!=0)
+		    {
+		        onec--;
+//		        temp.append("1");
+                temp+='1';
+		        zeroc--;
+//		        temp.append("0");
+                temp+='0';
+		        cnt+=2;
+		    }
+		  //  if(zeroc!=0 && temp.charAt(temp.length()-1)=='1')
+		  //  {
+		  //     cnt+=1; 
+		  //  }
+		  //  if(onec!=0 && temp.charAt(temp.length()-1)=='0')
+		  //  {
+		  //     cnt+=1; 
+		  //  }
+		  if(zeroc!=0 || onec!=0)
+		  {
+		      cnt+=1;
+		  }
+            System.out.println(cnt);
+		}
+	}
+}
