@@ -43,3 +43,45 @@ class Codechef
 		}
 	}
 }
+
+
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    int n=sc.nextInt();
+		    int arr[] = new int[n];
+		    for(int i=0;i<n;i++)
+		    {
+		        arr[i] = sc.nextInt();
+		    }
+		    HashMap<Integer,Integer> hm = new HashMap<>();
+		    for(int i=0;i<n;i++)
+		    {
+		        hm.put(arr[i],hm.getOrDefault(hm.get(arr[i]),0)+1);
+		    }
+		    int cnt=0;
+		    int max = -1;
+		    for(Integer i: hm.values())
+		    {
+		        if(max==i)
+		        {
+		            cnt++;
+		        }
+		        max = Math.max(i,max);
+		    }
+		    System.out.println(cnt>1?"YES":"NO");
+		}
+	}
+}
