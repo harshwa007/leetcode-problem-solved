@@ -1,0 +1,47 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+//https://www.codechef.com/problems/DOMINANT2
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    int n=sc.nextInt();
+		    int arr[] = new int[n];
+		    for(int i=0;i<n;i++)
+		    {
+		        arr[i] = sc.nextInt();
+		    }
+		    HashMap<Integer,Integer> hm = new HashMap<>();
+		    for(int i=0;i<n;i++)
+		    {
+		        hm.put(arr[i],hm.getOrDefault(arr[i],0)+1);
+		    }
+		    int max1= -1;
+		    int dup = 0;
+		    for(Integer i: hm.values())
+		    {
+		        if(max1==i)
+                {
+                    dup = i;
+                }
+                max1 = Math.max(i,max1);
+		    }
+		    
+		    System.out.println(max1!=dup?"YES":"NO");
+		  //  for(Integer i: hm.values())
+		  //  {
+		  //      System.out.print(i);
+		  //  }
+		  //  System.out.println();
+		}
+	}
+}
