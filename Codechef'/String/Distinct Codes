@@ -1,0 +1,27 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+//https://www.codechef.com/problems/DISTCODE
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    String str = sc.next();
+		    HashSet<String>hs = new HashSet<>();
+		    for(int i=0;i<str.length()-1;i++)
+		    {
+		        StringBuilder temp=new StringBuilder();
+		        temp.append(str.charAt(i));
+		        temp.append(str.charAt(i+1));
+		        hs.add(temp.toString());
+		    }
+		    System.out.println(hs.size());
+		}
+	}
+}
