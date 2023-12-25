@@ -1,0 +1,30 @@
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+//https://www.codechef.com/problems/SPLITIT
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    int len= sc.nextInt();
+		    String str = sc.next();
+		    String a = str;
+		    int flag=0;
+		    for(int i=0;i<len-1;i++)
+		    {
+		        if(a.charAt(i)==str.charAt(len-1))
+		        {
+		            flag=1;
+		            break;
+		        }
+		    }
+		    System.out.println(flag==1?"YES":"NO");
+		}
+	}
+}
