@@ -1,0 +1,55 @@
+/* package codechef; // don't place package name! */
+//https://www.codechef.com/problems/ATTIC
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		for(int t=0;t<test;t++)
+		{
+		    String str = sc.next();
+		    int learn = 0;
+		    int cnt = 0;
+		    int prev = 0;
+		    List<Integer>list = new ArrayList<>();
+		    for(int i=0;i<str.length()-1;i++)
+		    {
+		        char c = str.charAt(i);
+                if(c=='.')
+                {
+                    learn++;
+                }
+                if(learn>prev)
+                {
+                    cnt++;
+                }
+                prev = learn;
+                if(str.charAt(i+1)=='#')
+                {
+                    learn =0;
+                    list.add(cnt);
+                    cnt=0;
+                }
+		    }
+		    //System.out.println(list);
+		    cnt=0;
+		    int max = 0;
+		    for(Integer i:list)
+		    {
+		        if(i>max)
+		        {
+		            max=i;
+		            cnt++;
+		        }
+		    }
+		    System.out.println(cnt);
+		}
+	}
+}
