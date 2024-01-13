@@ -1,0 +1,56 @@
+import java.util.*;
+public class Main
+{
+    public static void getstre(String bi)
+    {
+        HashMap<String,Character> hm = new HashMap<>();
+        hm.put("001",'C');
+        hm.put("010",'G');
+        hm.put("011",'A');
+        hm.put("101",'T');
+        hm.put("110",'U');
+        String temp = "";
+        String ans = "";
+        boolean DNA=  false;
+        boolean RNA = false;
+        temp = bi.substring(0,3);
+        if(temp.equals("000")) DNA = true;
+        if(temp.equals("111")) RNA = true;
+        temp = "";
+        System.out.println(bi);
+        char[] h = bi.toCharArray();
+        
+        for(int j=3;j<h.length;j++)
+        {
+            char i = bi.charAt(j);
+            if(temp.length()!=3)
+            {
+                temp = temp + i;
+            }
+            if(temp.length()==3 )
+            {
+                if(DNA && hm.get(temp)=='U')
+                {
+                    ans = ans + 'T';
+                }
+                else if(RNA && hm.get(temp)=='T')
+                {
+                    ans = ans + 'U';
+                }
+                else{
+                    ans = ans + hm.get(temp);
+                }
+                temp = "";
+            }
+            
+
+        }
+        System.out.println(ans);
+        
+    }
+	public static void main(String[] args) {
+		
+        getstre("000001001011101010010110011");
+		
+	}
+}
