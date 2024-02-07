@@ -1,0 +1,38 @@
+class Solution
+{
+    //Function to check if two strings are rotations of each other or not.
+    public static boolean areRotations(String s1, String s2 )
+    {
+        // Your code herehttps://www.geeksforgeeks.org/problems/check-if-strings-are-rotations-of-each-other-or-not-1587115620/1?page=1&category=Strings&difficulty=Easy&sortBy=submissions
+        // if(s1.length()!=s2.length()) return false;
+        // if(s1.equals(s2))return true;
+        // Queue<Character> queue = new LinkedList<>();
+        // for(int i=0;i<s1.length();i++)
+        // {
+        //     queue.add(s1.charAt(i));
+        // }
+        // String t="";
+        // for(int i=1;i<s1.length();i++)
+        // {
+        //     t=t+queue.remove();
+        //     String temp=s1.substring(i,s1.length())+t;
+        //     //System.out.println(temp);
+        //     if(temp.equals(s2)) return true;
+        // }
+        // return false;
+        String str=s1+s1;
+        int i=0;
+        int j=0;
+        while(i<str.length() && j <s2.length()){
+            if(str.charAt(i)==s2.charAt(j)){
+                i++;j++;
+            }
+            else{
+                i++;
+            }
+        }
+        
+        return j==s2.length();
+    }
+    
+}
