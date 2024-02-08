@@ -1,0 +1,47 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    public static boolean checkPaa(String expr)
+    {
+        Deque<Character> stack = new ArrayDeque<>();
+        for(int i=0;i<expr.length();i++)
+        {
+            char c = expr.charAt(i);
+            if(c=='(' || c=='[' || c=='{')
+            {
+                stack.push(c);
+                continue;
+            }
+            if(stack.isEmpty())
+            {
+                return false;
+            }
+            char check;
+            switch(c)
+            {
+                case ')':
+                    check = stack.pop();
+                    if(check=='{' || check=='[') return false;
+                    break;
+                case '}':
+                    check=stack.pop();
+                    if(check=='[' || check=='(') return false;
+                    break;
+                case ']':
+                    check=stack.pop();
+                    if(check=='('||check=='{') return false;
+                    break;
+                
+            }
+  
+        }
+        return (stack.isEmpty());
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        String expr = sc.next();
+        System.out.println(checkPaa(expr)?"True":"False");
+    }
+}
