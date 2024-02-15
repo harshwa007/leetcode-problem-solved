@@ -1,0 +1,48 @@
+
+// link- https://www.hackerrank.com/challenges/two-characters/problem?isFullScreen=true
+public static int getLength(String s, char c1, char c2)
+    {
+        // this will check whether character are alteranating or not if they are 
+        // aletanting it will return its length
+        int cnt =0;
+        char lastChar = '\0';
+        for(char c:s.toCharArray())
+        {
+            if(c==c1 || c==c2)
+            {
+                ++cnt;
+                if(c==lastChar)
+                {
+                    return 0;
+                }
+                lastChar =c;
+            }
+        }
+        return cnt;
+    }
+    
+    public static int alternate(String s) {
+    // Write your code here
+    // added HashSet to remove duplicates
+        Set<Character> set = new HashSet<>();
+        int ans=0;
+        for(char c:s.toCharArray())
+        {
+            set.add(c);
+        }
+        for(char c1:set)
+        {
+            for(char c2:set)
+            {
+                //it will check two char same or not
+                if(c1!=c2)
+                {
+                int maxLength = getLength(s,c1,c2);
+                ans = Math.max(maxLength, ans);   
+                }
+            }
+        }
+        return  ans;
+    }
+
+}
