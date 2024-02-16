@@ -1,0 +1,13 @@
+//https://www.hackerrank.com/challenges/mars-exploration/problem?isFullScreen=true
+public static int marsExploration(String s) {
+    // Write your code here
+    int cnt=0;
+        for(int i=0;i<s.length()-2;i+=3)
+        {
+            String str = s.substring(i,i+3);
+            if(str.charAt(0)!='S') cnt++;
+            if(str.charAt(1)!='O') cnt++;
+            if(str.charAt(2)!='S') cnt++;
+        }
+        return cnt;
+    }
