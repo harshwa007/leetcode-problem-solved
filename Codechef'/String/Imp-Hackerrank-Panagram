@@ -1,0 +1,13 @@
+    public static String pangrams(String s) {
+    // Write your code here
+        Set<Character> hs = new HashSet<>();
+        s = s.toLowerCase();
+        s = s.replaceAll(" ", "");
+        for(char c:s.toCharArray())
+        {
+            hs.add(c);
+        }
+        if(hs.size()==26) return "pangram";
+        return "not pangram";
+        
+    }
