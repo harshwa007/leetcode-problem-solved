@@ -1,0 +1,20 @@
+    public static String funnyString(String s) {
+    // Write your code here
+      // link - https://www.hackerrank.com/challenges/funny-string/problem?isFullScreen=true
+        int diff1 =0;
+        int diff2 =0;
+        if(s.length()==0) return "Not Funny";
+        StringBuilder sb = new StringBuilder(s); //space complexity O(n)
+        String rev = sb.reverse().toString();
+        for(int i=1;i<s.length();i++)
+        {
+            int c1 = s.charAt(i-1);
+            int c2 = s.charAt(i);
+            diff1 = Math.abs(c2-c1);
+            int r1 = rev.charAt(i-1);
+            int r2 = rev.charAt(i);
+            diff2 = Math.abs(r2-r1);
+            if(diff1!=diff2) return "Not Funny";
+        }
+        return "Funny";
+    }
