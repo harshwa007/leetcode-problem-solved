@@ -1,0 +1,23 @@
+public static int theLoveLetterMystery(String s) {
+    // link-  https://www.hackerrank.com/challenges/the-love-letter-mystery/problem?isFullScreen=true
+        StringBuilder sb = new StringBuilder(s);
+        //if(sb==sb.reverse()) return 0;
+        int cnt=0;
+        int i=0;
+        int j=sb.length()-1;
+        while(i<=sb.length()/2 && j>=sb.length()/2)
+        {
+            int c1 = sb.charAt(i);
+            int c2 = sb.charAt(j);
+            if(c1<c2)
+            {
+                cnt=cnt+(c2-c1);
+            }
+            if(c1>c2)
+            {
+                cnt=cnt+(c1-c2);
+            }
+            i++;j--;
+        }
+        return cnt;
+    }
