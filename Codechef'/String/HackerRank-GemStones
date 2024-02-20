@@ -1,4 +1,22 @@
- /*
+    public static int gemstones(List<String> arr) {
+    // Write your code here
+        int cnt=0;
+        Map<Character,Integer> hm = new HashMap<>();
+        for(String s:arr)
+        {
+            HashSet<Character> hs = new HashSet<>();
+            for(char c:s.toCharArray())
+            {
+                if(hs.add(c))
+                {
+                    hm.put(c, hm.getOrDefault(c, 0)+1);
+                    if(hm.get(c)==arr.size()) cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+/*
 //some test cases are passed writtem by me
 //https://www.hackerrank.com/challenges/gem-stones/problem?isFullScreen=true
 public static int gemstones(List<String> arr) {
@@ -34,3 +52,4 @@ public static int gemstones(List<String> arr) {
         System.out.println(cnt);
         return cnt;
     }
+*/
