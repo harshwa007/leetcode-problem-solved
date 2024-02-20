@@ -1,0 +1,36 @@
+ /*
+//some test cases are passed writtem by me
+//https://www.hackerrank.com/challenges/gem-stones/problem?isFullScreen=true
+public static int gemstones(List<String> arr) {
+    // Write your code here
+        boolean tmp[] = new boolean[arr.get(0).length()];
+        for(int i=0;i<tmp.length;i++)
+        {
+            tmp[i]=true;
+        }
+        int i=1;
+        String str = arr.get(0);
+        while(i<arr.size())
+        {
+            StringBuilder s1 = new StringBuilder();
+            s1.append(arr.get(i));
+            int j=0;
+            for(char c:str.toCharArray())
+            {
+                int index = s1.indexOf(Character.toString(c));
+                if(index==-1)
+                {
+                    tmp[j]=false;
+                }
+                j++;
+            }
+            i++;
+        }
+        int cnt=0;
+        for(int k=0;k<tmp.length;k++)
+        {
+            if(tmp[k]==true) cnt++;
+        }
+        System.out.println(cnt);
+        return cnt;
+    }
