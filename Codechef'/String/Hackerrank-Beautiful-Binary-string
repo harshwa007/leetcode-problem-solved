@@ -1,0 +1,19 @@
+    public static int beautifulBinaryString(String b) {
+    // link-->https://www.hackerrank.com/challenges/beautiful-binary-string/problem?isFullScreen=true
+        int i=0;
+        int j=2;
+        int cnt=0;
+        StringBuilder sb = new StringBuilder(b);
+        while(i<sb.length()-2)
+        {
+            String str = sb.substring(i,j+1);
+            if(str.equals("010"))
+            {
+                cnt++;
+                sb.setCharAt(j, '1');
+            }
+            i++;
+            j++;
+        }
+        return cnt;
+    }
