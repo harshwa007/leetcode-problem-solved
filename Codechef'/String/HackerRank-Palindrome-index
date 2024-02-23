@@ -1,0 +1,49 @@
+//link- https://www.hackerrank.com/challenges/palindrome-index/problem?isFullScreen=true
+// only 8 test cases Passed
+// public static boolean checkPalindrome(String s)
+    // {
+    //     int n = s.length();
+    //     for(int i=0;i<n/2;i++)
+    //     {
+    //         if(s.charAt(i)!=s.charAt(n-1-i)) return false;
+    //     }
+    //     return true;
+    // }
+    // public static int palindromeIndex(String s) {
+    //     if(checkPalindrome(s)) return -1;
+    //     if(checkPalindrome(s.substring(1))) return 0;
+    //     else {
+    //         for(int i=1;i<s.length()-1;i++)
+    //         {
+    //             String str="";
+    //             str = str+s.substring(0,i)+s.substring(i+1,s.length());
+    //             if(checkPalindrome(str)) return i;
+    //         }
+    //         int len = s.length()-1;
+    //         if(checkPalindrome(s.substring(0,len))) return s.length()-1;
+    //     }
+    //     return -1;
+        
+    // }
+    public static boolean isPalindrome(String s)
+    {
+        int n=s.length();
+        for(int i=0;i<n/2;i++)
+            if(s.charAt(i) != s.charAt(n-1 -i))
+                return false;
+        return true;
+    }
+    
+    public static int palindromeIndex(String s)
+    {
+        int n=s.length();
+        for(int i=0;i<n/2;i++)
+            if(s.charAt(i) != s.charAt(n-1 -i))
+            {
+                if(isPalindrome(s.substring(0,i) + s.substring(i+1)))
+                    return i;
+                else
+                    return n-1-i;
+            }
+        return -1;
+    }
