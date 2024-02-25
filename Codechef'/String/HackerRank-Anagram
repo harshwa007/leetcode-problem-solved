@@ -1,0 +1,23 @@
+    public static int anagram(String s) {
+    // Write your code here
+        if(s.length()%2!=0) return -1;
+        int cnt=0;
+        String str1 = s.substring(0,s.length()/2);
+        //System.out.println(str1);
+        String str2 = s.substring(s.length()/2,s.length());
+        //System.out.println(str2);
+        
+        for(int i=0;i<str1.length();i++)
+        {
+            String c = str1.substring(i,i+1);
+            if(str2.contains(c))
+            {
+                str2 = str2.replaceFirst(c, "");
+            }
+        }
+
+        
+        
+        
+        return str2.length();
+    }
