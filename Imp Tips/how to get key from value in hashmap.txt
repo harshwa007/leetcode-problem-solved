@@ -1,0 +1,25 @@
+how to get key from value in hashmap
+
+
+import java.util.*;
+import java.lang.*;
+public class HashMapPractice{
+	public static void main(String args[])
+	{
+		HashMap<String,Integer> hm = new HashMap<>();
+		hm.put("one", 1);
+		hm.put("two",2);
+		hm.put("three",3);
+		int search = 4;
+		String FoundKey = null;
+		for(Map.Entry<String,Integer> entry:hm.entrySet())
+		{
+			System.out.println("Key:"+ entry.getKey()+" "+"Value"+entry.getValue());
+			if(entry.getValue()==search)
+			{
+				FoundKey = entry.getKey();
+			}
+		}
+		System.out.println(FoundKey);
+	}
+}
