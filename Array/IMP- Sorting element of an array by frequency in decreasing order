@@ -1,0 +1,63 @@
+package com.demo.prcatice;
+//https://takeuforward.org/data-structure/sort-elements-of-an-array-by-frequency/#:~:text=STEP%201%3A%20Just%20store%20all,them%20into%20the%20answer%20vector.
+import java.util.*;
+
+public class FreqArray {
+	public static class Pair{
+		int index;
+		int freq;
+		Pair(){
+			
+		}
+		Pair(int index,int freq)
+		{
+			this.index = index;
+			this.freq = freq;
+		}
+	}
+	private static void SortByFreq(int[] arr, int n) {
+		
+		HashMap<Integer, Integer> map=new HashMap<>();
+		  for (int i = 0; i < n; i++)
+		  {
+		      
+		    map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+		  }
+//		  ArrayList<Pair> l = new ArrayList<>();
+//		  for(int i:map.keySet())
+//		  {
+//			  l.add(new Pair(i,map.get(i)));
+//		  }
+		  ArrayList<Pair> vec=new ArrayList<>();
+		  for (int x:map.keySet())
+		  {
+		    vec.add(new Pair(x,map.get(x)));
+		  }
+		  Collections.sort(vec,(a,b)->{
+			  if(a.freq==b.freq)
+			  {
+				  return a.index-b.index;
+			  }
+			  else {
+				  return b.freq-a.freq;
+			  }
+		  });
+		  for(int i=0;i<vec.size();i++)
+		  {
+//			  while (vec.get(i).freq > 0)
+//			    {
+//			      System.out.print(vec.get(i).index+" ");
+//			      vec.get(i).freq--;
+//			    }
+			  System.out.print(vec.get(i).index+" ");
+		  }
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int arr[] = {5,5,5,5,10,2,2,1,1,1};
+		int n = arr.length;
+		SortByFreq(arr,n);
+	}
+
+
+}
