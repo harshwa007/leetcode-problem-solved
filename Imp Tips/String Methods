@@ -29,3 +29,9 @@ ArrayList<String> al = new ArrayList<String>();
         /* Collections.sort method is sorting the 
         elements of ArrayList in ascending order. */
         Collections.sort(al, Collections.reverseOrder()); 
+
+// convert array to list 
+List list = 
+            new ArrayList(Arrays.asList(arr)); 
+//convert list to array
+String[] namesArray = names.toArray(new String[0]);  
