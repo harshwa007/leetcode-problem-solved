@@ -16,3 +16,16 @@ public class Main
 
     }
 }
+
+
+//to revrese sorting 
+ArrayList<String> al = new ArrayList<String>(); 
+        al.add("Geeks For Geeks"); 
+        al.add("Friends"); 
+        al.add("Dear"); 
+        al.add("Is"); 
+        al.add("Superb"); 
+ 
+        /* Collections.sort method is sorting the 
+        elements of ArrayList in ascending order. */
+        Collections.sort(al, Collections.reverseOrder()); 
