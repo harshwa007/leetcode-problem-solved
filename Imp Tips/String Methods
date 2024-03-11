@@ -150,3 +150,18 @@ class GFG {
 
 
 ----------------------------------------------------------------------------------------
+How to join array and convert into sentence
+    public static void main(String[] args) {
+        String[] fruits = {"banana","apple",  "cherry"};
+        String delimiter = ", ";  // You can change the delimiter as needed
+        
+        // Join the strings with the specified delimiter
+        // String joinedString = String.join(delimiter, fruits);
+
+        // System.out.println("Joined string: " + joinedString);
+        String str = String.join("@",fruits);
+        System.out.println(str);
+        Arrays.sort(fruits);
+        System.out.println(fruits[0]+fruits[2]);
+        
+    }
