@@ -68,3 +68,29 @@ class Solution {
         return list.toArray(new int[list.size()][]);
     }
 }
+/*
+Why move the smaller one?
+if (v21 < v22)
+    i++;
+else
+    j++;
+Case 1: v21 < v22
+[first]  [-----]
+[second] [----------]
+First interval ends earlier
+It cannot intersect with any future intervals of secondList
+So move i++
+Case 2: v22 < v21
+[first]  [----------]
+[second] [-----]
+Second interval ends earlier
+Move j++
+❌ What if you move both?
+
+If you do:
+
+i++;
+j++;
+
+You will skip possible intersections
+*/
