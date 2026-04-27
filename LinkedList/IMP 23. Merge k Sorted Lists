@@ -1,0 +1,115 @@
+23. Merge k Sorted Lists
+Solved
+Hard
+Topics
+premium lock icon
+Companies
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+
+Merge all the linked-lists into one sorted linked-list and return it.
+
+ 
+
+Example 1:
+
+Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+merging them into one sorted linked list:
+1->1->2->3->4->4->5->6
+Example 2:
+
+Input: lists = []
+Output: []
+Example 3:
+
+Input: lists = [[]]
+Output: []
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists==null || lists.length==0) return null;
+        return mergeSort(lists,0,lists.length-1);
+    }
+    public ListNode mergeSort(ListNode[] lists, int left, int right)
+    {
+        if(left==right) return lists[left];
+
+        int mid = left + (right - left) / 2;
+        ListNode l1 = mergeSort(lists,left,mid);
+        ListNode l2 = mergeSort(lists,mid+1, right);
+        return mergeTwoListNodes(l1,l2);
+    }
+
+    public ListNode mergeTwoListNodes(ListNode l1, ListNode l2)
+    {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        while(l1 != null && l2 != null)
+        {
+            if(l1.val < l2.val)
+            {
+                curr.next = l1;
+                l1 = l1.next;
+            }
+            else
+            {
+                curr.next = l2;
+                l2 = l2.next;
+            }
+            curr = curr.next;
+        }
+        if(l1 != null) curr.next = l1;
+        if(l2 != null) curr.next = l2;
+        return dummy.next;
+    }
+}
+
+
+//-------------alternative nlogn and o(n) vomplexity 
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(
+            (a, b) -> a.val - b.val
+        );
+
+        // add first node of each list
+        for (ListNode node : lists) {
+            if (node != null) {
+                pq.add(node);
+            }
+        }
+
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+
+        while (!pq.isEmpty()) {
+            ListNode minNode = pq.poll();
+            curr.next = minNode;
+            curr = curr.next;
+
+            if (minNode.next != null) {
+                pq.add(minNode.next);
+            }
+        }
+
+        return dummy.next;
+    }
+}
