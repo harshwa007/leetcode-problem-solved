@@ -1,0 +1,72 @@
+/*
+You are given an m x n matrix of characters boxGrid representing a side-view of a box. Each cell of the box is one of the following:
+
+A stone '#'
+A stationary obstacle '*'
+Empty '.'
+The box is rotated 90 degrees clockwise, causing some of the stones to fall due to gravity. Each stone falls down until it lands on an obstacle, another stone, or the bottom of the box. Gravity does not affect the obstacles' positions, and the inertia from the box's rotation does not affect the stones' horizontal positions.
+
+It is guaranteed that each stone in boxGrid rests on an obstacle, another stone, or the bottom of the box.
+
+Return an n x m matrix representing the box after the rotation described above.
+*/
+
+Approach 3: Combine rotation and gravity operations
+Intuition
+As mentioned earlier, the time complexity of O(m×n) achieved with the second approach represents a lower bound for this particular problem. This means we cannot further optimize our algorithm in terms of complexity. However, in this approach, we aim to streamline our code by combining the operations of rotation and the effects of gravity. This will allow us to generate the result in a single pass instead of three, potentially reducing the runtime of our program.
+
+First, let's derive the formula to find the position of the cell originally located at (i,j) in the rotated grid. Following the strategy outlined for the transpose grid, we will first map the position (i,j) to (j,i). Then, we will reverse each row, meaning that the first element becomes the last, the second element becomes the second-to-last, and so on. Specifically, the element at index i will move to the position m−i−1. Combining these two conversions, we get that the cell originally located at (i,j) will end up in the position (j,m−i−1).
+
+Now, we are ready to execute the same algorithm as before. This time, we will read the type of each cell from the original grid, box, and place the results into the result grid using the positions determined by the formula outlined above.
+
+Algorithm
+Initialize m and n to the number of rows and columns of the original grid, respectively.
+Create an n x m grid, called result, and initialize all of its elements to be empty cells ('.').
+Iterate over the rows of the original grid, box, with i from 0 to m-1:
+For each row i, initialize a variable lowestRowWithEmptyCell to n-1.
+Iterate over all of its elements in reversed order with j from n-1 to 0. On each iteration:
+If box[i][j] contains a stone, let it fall to the lowest empty cell:
+Set result[lowestRowWithEmptyCell][m-i-1] = '#'.
+(Optionally) Set result[j][m-i-1] = '.'.
+Update lowestRowWithEmptyCell to i-1.
+If box[i][j] contains an obstacle:
+Set result[j][m-i-1] = '*'.
+Update lowestRowWithEmptyCell to i-1.
+Return result.
+
+
+class Solution {
+    public char[][] rotateTheBox(char[][] box) {
+        int m = box.length;
+        int n = box[0].length;
+
+        char[][] res = new char[n][m];
+
+        for(int i = 0; i <n; ++i)
+        {
+            for(int j=0; j<m; ++j)
+            {
+                res[i][j] = '.';
+            }
+        }
+
+        for(int i = 0; i< m; ++i)
+        {
+            int lowestRowWithEmptyCell = n - 1;
+            for(int j = n-1; j>=0; --j)
+            {
+                if(box[i][j]=='#')
+                {
+                    res[lowestRowWithEmptyCell][m-i-1] = '#';
+                    --lowestRowWithEmptyCell;
+                }
+                if(box[i][j]=='*')
+                {
+                    res[j][m-i-1] = '*';
+                    lowestRowWithEmptyCell = j-1;
+                }
+            }
+        }
+        return res;
+    }
+}
