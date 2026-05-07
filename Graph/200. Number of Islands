@@ -1,0 +1,88 @@
+200. Number of Islands
+Solved
+Medium
+Topics
+premium lock icon
+Companies
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+ 
+
+Example 1:
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+Example 2:
+
+Input: grid = [
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]
+Output: 3
+ 
+
+Constraints:
+
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 300
+grid[i][j] is '0' or '1'.
+
+
+class Solution {
+    public int numIslands(char[][] grid) {
+        Queue<int[]> q = new LinkedList<>();
+        int r = grid.length;
+        int c = grid[0].length;
+        int count = 0;
+        int[][] dir = new int[][]
+        {
+            new int[]{1,0},
+            new int[]{-1,0},
+            new int[]{0,1},
+            new int[]{0,-1}
+        };
+        for(int i = 0; i <r; ++i)
+        {
+            for(int j = 0; j<c;++j)
+            {
+                if(grid[i][j]=='1')
+                {
+                    q.offer(new int[]{i,j});
+                    count++;
+                    grid[i][j] = '0';
+                    while(!q.isEmpty())
+                    {
+                        int[] ele = q.poll();
+                        int row = ele[0];
+                        int col = ele[1];
+                        for(int[] d : dir)
+                        {
+                            int nr = row + d[0];
+                            int nc = col + d[1];
+                            if(nr >= 0 && nc >= 0 
+                                && nr < r && nc < c 
+                                && grid[nr][nc] == '1')
+                            {
+                                q.offer(new int[]{nr,nc});
+                                grid[nr][nc] = '0';
+                            }
+                        }
+                
+                    }
+                }
+            }
+           
+        }
+        return count;
+    }
+}
