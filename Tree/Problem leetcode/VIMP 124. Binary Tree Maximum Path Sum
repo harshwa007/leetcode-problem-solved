@@ -60,3 +60,75 @@ class Solution {
         return Math.max(left,right) + root.val;
     }
 }
+
+
+Step 1: Visit children first (Postorder DFS)
+left = maxPathSum(root.left, maxVal);
+right = maxPathSum(root.right, maxVal);
+
+Get the best downward path from left and right child.
+
+Step 2: Ignore negative paths
+left = Math.max(0, left);
+right = Math.max(0, right);
+
+If a child contributes a negative sum, don't take it.
+
+Example:
+
+   10
+  /
+-5
+
+Better to take 0 than -5.
+
+Step 3: Check if current node is the highest point of a path
+root.val + left + right
+
+Example:
+
+    20
+   /  \
+ 15    7
+
+Path through 20:
+
+15 -> 20 -> 7 = 42
+
+Update global answer:
+
+maxVal[0] = Math.max(maxVal[0], root.val + left + right);
+Step 4: Return value to parent
+return root.val + Math.max(left, right);
+
+Parent can continue through only one side.
+
+Example:
+
+    20
+   /  \
+ 15    7
+
+Return:
+
+20 + max(15, 7)
+= 35
+
+representing path:
+
+15 -> 20
+Remember
+
+At every node:
+
+          node
+         /    \
+      left   right
+
+Update answer using both sides
+
+node + left + right
+
+Return to parent using one side
+
+node + max(left, right)
