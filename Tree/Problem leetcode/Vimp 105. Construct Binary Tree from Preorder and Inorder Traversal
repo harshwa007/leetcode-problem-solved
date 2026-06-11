@@ -1,0 +1,72 @@
+105. Construct Binary Tree from Preorder and Inorder Traversal
+
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+
+ The Core TheoryYou need two traversals to rebuild a binary tree because one traversal alone does not provide enough structural information. Here is how they work together:Preorder (Root $\rightarrow$ Left $\rightarrow$ Right): The very first element of a preorder array (or sub-array) is always the root of the current tree.Inorder (Left $\rightarrow$ Root $\rightarrow$ Right): Once you know the root value, you can find it in the inorder array. This acts as a pivot: everything to the left of this pivot forms the left subtree, and everything to the right forms the right subtree.By continuously finding the root in the preorder array and using it to split the inorder array, you can recursively construct the entire tree.Step-by-Step Code BreakdownYour code uses a recursive divide-and-conquer approach, heavily optimized using a HashMap.1. The HashMap Optimization (inMap)
+If you linearly searched the inorder array to find the root at every step, your time complexity would degrade to $O(N^2)$. By mapping each value to its index upfront (inMap.put(inorder[i], i)), you achieve $O(1)$ lookups, bringing the overall time complexity down to $O(N)$.2. The Recursive Function Boundaries
+Instead of physically slicing the arrays (which is slow and memory-intensive), you pass index pointers: preStart/preEnd for the preorder array and inStart/inEnd for the inorder array.Base Case: If preStart > preEnd or inStart > inEnd, there are no elements left to construct a tree, so it returns null.Identify the Root: You create the current root node using the first element of the current preorder segment: preorder[preStart].Calculate Subtree Sizes:You look up the root's index in the inorder array: inRoot = inMap.get(root.val).You calculate exactly how many nodes belong to the left subtree: numLeft = inRoot - inStart.Divide and Conquer:Left Subtree: You recursively call buildTree for the left side. In preorder, these nodes start immediately after the root (preStart + 1) and end after numLeft elements (preStart + numLeft). In inorder, they are everything before the root (inStart to inRoot - 1).Right Subtree: You do the same for the right side. In preorder, these nodes start right after the left subtree's elements (preStart + numLeft + 1). In inorder, they are everything after the root (inRoot + 1 to inEnd
+
+Example 1:
+
+
+Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+Output: [3,9,20,null,null,15,7]
+Example 2:
+
+Input: preorder = [-1], inorder = [-1]
+Output: [-1]
+ 
+
+Constraints:
+
+1 <= preorder.length <= 3000
+inorder.length == preorder.length
+-3000 <= preorder[i], inorder[i] <= 3000
+preorder and inorder consist of unique values.
+Each value of inorder also appears in preorder.
+preorder is guaranteed to be the preorder traversal of the tree.
+inorder is guaranteed to be the inorder traversal of the tree.
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        Map<Integer,Integer> inMap = new HashMap<>();
+        for(int i = 0;i<inorder.length; ++i)
+        {
+            inMap.put(inorder[i],i);
+        }
+        return buildTree(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1, inMap);
+    }
+    private TreeNode buildTree(int[] preorder, int preStart, int preEnd, 
+    int[] inorder, int inStart,  int inEnd, Map<Integer,Integer> inMap )
+    {
+        //declare null
+        if(preStart > preEnd || inStart > inEnd)
+            return null;
+        //It Will be always preOrder[preStarr] as root
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int inRoot  =inMap.get(root.val);
+        int numLeft = inRoot -  inStart;
+        root.left = buildTree(preorder, preStart + 1, preStart+ numLeft, 
+        inorder, inStart, inRoot - 1, inMap);
+        root.right = buildTree(preorder, preStart+numLeft + 1, preEnd,
+        inorder, inRoot +1, inEnd,inMap);
+        return root;
+    }
+}
