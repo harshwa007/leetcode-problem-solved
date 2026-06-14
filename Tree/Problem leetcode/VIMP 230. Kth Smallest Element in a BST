@@ -1,0 +1,125 @@
+230. Kth Smallest Element in a BST
+
+Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+
+ 
+
+Example 1:
+
+
+Input: root = [3,1,4,null,2], k = 1
+Output: 1
+Example 2:
+
+
+Input: root = [5,3,6,2,4,null,null,1], k = 3
+Output: 3
+ 
+
+Constraints:
+
+The number of nodes in the tree is n.
+1 <= k <= n <= 104
+0 <= Node.val <= 104
+ 
+
+Follow up: If the BST is modified often (i.e., we can do insert and delete operations) and you need to find the kth smallest frequently, how would you optimize?
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        int count = 0;
+        TreeNode curr = root;
+        while(curr != null)
+        {
+            if(curr.left == null)
+            {
+                ++count;
+                if(count == k)
+                    return curr.val;
+                curr = curr.right;
+            }
+            else
+            {
+                TreeNode pred = curr.left;
+                while(pred.right != null && pred.right!= curr)
+                {
+                    pred = pred.right;
+                }
+                if(pred.right == null)
+                {
+                    //Create Thread 
+                    pred.right = curr;
+                    curr = curr.left;
+                }
+                else
+                {
+                    //Remove Thread
+                    pred.right = null;
+                     ++count;
+                    if(count == k)
+                        return curr.val;
+                    curr = curr.right;
+                }
+            }
+        }
+        return 0;
+    }
+}
+
+In a Binary Search Tree (BST), an Inorder Traversal (Left $\rightarrow$ Root $\rightarrow$ Right) visits the nodes in strictly ascending (sorted) order.
+Because the nodes are visited from smallest to largest, finding the $k$-th smallest element simply means tracking how many nodes we have visited. 
+When our visit count reaches $k$, the current node is our answer.Why Morris Traversal? (The "Magic")Standard inorder traversals use Recursion or a Stack.
+Both require $O(H)$ extra space (where $H$ is the tree height) to remember how to "go back up" to a parent node after finishing
+its left subtree.Morris Traversal achieves $O(1)$ auxiliary space (no recursion, no stack) by temporarily modifying the tree structure. 
+It links the predecessor of a node directly to the node itself, creating a temporary "escape route" or shortcut back up the tree.Key Concept:
+The Inorder PredecessorFor any node curr, its inorder predecessor is the node that comes immediately before it in a sorted list.To find it: Go to curr.left,
+and then go as far right as possible.Step-by-Step Logic BreakdownAs curr moves through the tree, 
+it encounters two main scenarios:
+1. curr.left == null
+There is no left subtree to explore.This means curr is the smallest available node right now.Action: 
+We "visit" it (count++), check if it's the $k$-th element, and move to the right child (curr = curr.right).
+2. curr.left != null
+There is a left subtree,
+so we can't visit curr yet. We must find its predecessor (pred) to establish or tear down a shortcut.Sub-scenario A: 
+The shortcut doesn't exist yet (pred.right == null)This is our first time seeing this sub-tree.Action: We point pred.right = curr
+(creating the thread/shortcut) and move deeper into the left child (curr = curr.left).Sub-scenario B: The shortcut already exists (pred.right == curr)
+This means we have already completely finished exploring the left subtree and used our shortcut to get back up to curr.Action: Clean up! 
+We break the thread (pred.right = null) to restore the original tree shape. Since the left side is done, we "visit" curr (count++), check if it's $k$,
+and then move to the right (curr = curr.right). 
+
+easy incorder trqasersal with count count==k return it
+
+class Solution {
+    int idx = 0;
+    int kthsmall = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        if(root == null);
+        traverse(root,k);
+        return kthsmall;
+    }
+    public void traverse(TreeNode node, int k){
+        if(node == null) return;
+        traverse(node.left,k);
+        idx++;
+        if(idx == k) kthsmall = node.val;
+        traverse(node.right,k);
+    }
+}
